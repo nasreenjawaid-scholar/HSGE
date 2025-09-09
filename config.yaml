@@ -1,0 +1,83 @@
+# H-SGE Configuration File
+# Adjust these parameters based on your specific requirements
+
+# Model Paths
+models:
+  yolov5_path: "models/yolov5s.pt"
+  yolov7_path: "models/yolov7.pt"
+  yolo10_path: "models/yolo10n.pt"
+  yolo11_path: "models/yolo11n.pt"
+  gan_model_path: "models/gan_enhancer.pth"
+
+# Detection Parameters
+detection:
+  confidence_threshold: 0.25
+  iou_threshold: 0.45
+  kg_threshold: 0.7
+  input_size: [640, 640]
+
+# Knowledge Graph Parameters
+knowledge_graph:
+  spatial_weight: 0.3
+  contextual_weight: 0.4
+  temporal_weight: 0.3
+  kg_config_file: "configs/knowledge_graph.json"
+
+# Training Parameters
+training:
+  batch_size: 16
+  learning_rate: 0.0001
+  epochs: 100
+  optimizer: "AdamW"
+  scheduler: "CosineAnnealingLR"
+  
+# Data Paths
+data:
+  train_images: "data/train/images"
+  train_annotations: "data/train/annotations.json"
+  val_images: "data/val/images" 
+  val_annotations: "data/val/annotations.json"
+  test_images: "data/test/images"
+  test_annotations: "data/test/annotations.json"
+
+# Fusion Weights
+fusion:
+  model_weights:
+    yolov5: 0.20
+    yolov7: 0.25
+    yolo10: 0.25
+    yolo11: 0.30
+  kg_weight: 0.3
+  confidence_weight: 0.7
+
+# Optimization Strategies
+optimization:
+  selective_processing: true
+  adaptive_enhancement: true
+  dynamic_model_selection: true
+  multi_threading: true
+  
+  thresholds:
+    brightness_threshold: 120
+    confidence_disagreement: 0.3
+    scene_complexity: 0.5
+
+# Hardware Configuration
+hardware:
+  device: "cuda"  # cuda, cpu, mps
+  num_workers: 4
+  pin_memory: true
+  mixed_precision: true
+
+# Logging
+logging:
+  level: "INFO"
+  log_file: "logs/hsge.log"
+  tensorboard_dir: "runs"
+  save_frequency: 10
+
+# Evaluation
+evaluation:
+  metrics: ["precision", "recall", "f1_score", "map_50", "map_75"]
+  iou_thresholds: [0.3, 0.5, 0.7]
+  confidence_thresholds: [0.1, 0.25, 0.5, 0.75, 0.9]
